@@ -28,7 +28,7 @@
 | status_id      | integer    | null: false                    |
 | del_charge_id  | integer    | null: false                    |
 | prefecture_id  | integer    | null: false                    |
-| del_days_id    | integer    | null: false                    |
+| del_day_id    | integer    | null: false                    |
 | price          | integer    | null: false                    |
 | user           | references | null: false, foreign_key: true |
 
@@ -39,7 +39,8 @@
 - belongs_to_active_hash :category
 - belongs_to_active_hash :status
 - belongs_to_active_hash :del_charge
-- belongs_to_active_hash :del_days
+- belongs_to_active_hash :del_day
+- belongs_to_active_hash :prefecture
 
 ## purchases テーブル
 
@@ -64,7 +65,7 @@
 | address       | string     | null: false                    |
 | building      | string     |                                |
 | phone_num     | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| purchase      | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -86,7 +87,7 @@
 
 - has_many :items
 
-## del_days
+## del_day
 ### Association
 
 - has_many :items
