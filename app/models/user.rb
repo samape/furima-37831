@@ -6,6 +6,8 @@ class User < ApplicationRecord
   
   with_options presence: true do
     validates :nickname
+    # 半角英数字混合
+    validates :password, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
     # 全角（漢字・ひらがな・カタカナ）
     validates :first_name, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
     # 全角（漢字・ひらがな・カタカナ）
