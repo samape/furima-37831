@@ -6,6 +6,8 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :del_day
 
+  has_one_attached :image
+
   validates :name, :content, :price, :user, presence: true
   validates :category_id, :status_id, :del_charge_id, :prefecture_id, :del_day_id, numericality: { other_than: 1, message: "can't be blank" }
 end
