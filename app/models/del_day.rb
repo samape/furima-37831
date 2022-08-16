@@ -1,4 +1,4 @@
-class Del_Day < ActiveHash::Base
+class DelDay < ActiveHash::Base
   self.data = [
     { id: 1, name: '---' },
     { id: 2, name: '1〜2日で発送' },
@@ -8,5 +8,5 @@ class Del_Day < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :items
-  
+
 end
