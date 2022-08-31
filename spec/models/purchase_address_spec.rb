@@ -24,6 +24,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
       end
+      it 'post_codeが空では保存できない' do
+        @purchase_address.post_code = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Post code can't be blank")
+      end
       it 'post_codeに3桁目と4桁目の間にハイフンが含まれていないと保存できない' do
         @purchase_address.post_code = '1234567'
         @purchase_address.valid?
@@ -47,13 +52,22 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'phone_numが空では保存できない' do
         @purchase_address.phone_num = ''
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone num can't be blank",
-                                                                  'Phone num is invalid. Not include hyphen(-)')
+        expect(@purchase_address.errors.full_messages).to include("Phone num can't be blank")
       end
       it 'phone_numにハイフンが含まれていると保存できない' do
         @purchase_address.phone_num = '03-1111-1111'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Phone num is invalid. Not include hyphen(-)')
+      end
+      it 'phone_numが9桁以下では保存できない' do
+        @purchase_address.phone_num = '123456789'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone num is invalid. Not include hyphen(-)")
+      end
+      it 'phone_numが12桁以上では保存できない' do
+        @purchase_address.phone_num = '123456789012'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone num is invalid. Not include hyphen(-)")
       end
       it 'userが紐付いていないと保存できない' do
         @purchase_address.user_id = nil
