@@ -3,13 +3,11 @@ class PurchasesController < ApplicationController
   before_action :set_item
 
   def index
-    set_item
     @purchase_address = PurchaseAddress.new
     redirect_to root_path if current_user == @item.user || @item.purchase.presence
   end
 
   def create
-    set_item
     @purchase_address = PurchaseAddress.new(purchase_params)
     if @purchase_address.valid?
       pay_item
